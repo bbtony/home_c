@@ -48,20 +48,19 @@ int main(int argc, char *argv[])
     // Создание узлов (блоков)
     list item_l = { .address = 140525067852320, .size = 10, .comment = "Block L" };
     list item_b = { .address = 140525067852350, .size = 30, .comment = "Block B" };
-    list item_a = { .address = 140525067852900, .size = 100, .comment = "Block A" }; // Максимальный размер
+    list item_a = { .address = 140525067852900, .size = 100, .comment = "Block A" };
 
-    // Соединение узлов в список (L -> B -> A -> NULL)
     item_l.next = &item_b;
     item_b.next = &item_a;
-    item_a.next = NULL; // Обязательно завершить список указателем NULL
+    item_a.next = NULL;
 
-    // Передаем указатель на начало списка
     uint64_t result_address = findMaxBlock(&item_l); 
 
-    // Вывод результата: используем PRId64 для корректного вывода uint64_t
     printf("Result Address: %" PRIu64 "\n", result_address);
-    // Для проверки, какой размер был найден:
-    // printf("Max Size: %zu\n", findMaxBlock(&item_l)); // Для вывода размера нужно изменить функцию или логику
+
+    uint64_t sum_size = totalMemoryUsage(&item_l);
+
+    printf("Result size %" PRIu64 "\n", sum_size);
 
     return 0;
 }
